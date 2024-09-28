@@ -26,7 +26,22 @@
   border-color: #fff;
 }
 
+
 .buttons-card {
   display: flex;
   justify-content: space-evenly;
+}
+
+body {
+  padding-top: 70px;
+  margin: 0;
+}
+
+form{
+  margin: 10% 20%;
+}
+
+footer {
+  width: 100vw;
+  padding: 0;
 }
