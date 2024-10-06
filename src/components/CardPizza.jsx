@@ -2,27 +2,23 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import "../App.css";
 
-function CardPizza({ imagen, titulo, ingredientes, precio }) {
+const CardPizza = ({ pizza }) => {
   return (
-    <>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={imagen} />
-        <Card.Body>
-          <Card.Title>{titulo}</Card.Title>
-          <hr />
-          <Card.Text>
-            <strong>Ingredientes:</strong> 🍕{ingredientes.join(", ")}
-          </Card.Text>
-          <hr />
-          <Card.Text>Precio: {precio}</Card.Text>
-          <div className='buttons-card'>
-            <Button variant="outline-dark">Ver Más 👀</Button>
-            <Button variant="dark">Añadir 🛒</Button>
-          </div>
-        </Card.Body>
-      </Card>
-    </>
+    <Card style={{ width: "18rem" }}>
+      <Card.Img variant="top" src={pizza.imagen} alt={pizza.nombre} />
+      <Card.Body>
+        <Card.Title>{pizza.nombre}</Card.Title>
+        <Card.Text>
+          <strong>Precio:</strong> ${pizza.precio} <br />
+          <strong>Disponibilidad:</strong> {pizza.disponibilidad} <br />
+          <strong>Ingredientes: 🍕</strong> {pizza.ingredientes.join(", ")}
+        </Card.Text>
+        <Button variant="primary" disabled={pizza.stock === 0}>
+          {pizza.stock > 0 ? "Añadir al carrito" : "Agotado"}
+        </Button>
+      </Card.Body>
+    </Card>
   );
-}
+};
 
 export default CardPizza;
