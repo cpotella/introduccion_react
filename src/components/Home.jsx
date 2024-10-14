@@ -1,8 +1,19 @@
+import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardPizza from "./CardPizza";
-import { pizzas } from "../pizzas";
 
 const Home = () => {
+  const [pizzas, setPizzas] = useState([]);
+
+  useEffect(() => {
+    const apiPizzas = async () => {
+      const response = await fetch("http://localhost:5001/api/pizzas");
+      const data = await response.json();
+      setPizzas(data);
+    };
+    apiPizzas();
+  }, []);
+
   return (
     <Container fluid className="mt-5">
       <h2>Nuestras Pizzas</h2>
