@@ -26,7 +26,6 @@
   border-color: #fff;
 }
 
-
 .buttons-card {
   display: flex;
   justify-content: space-evenly;
@@ -37,11 +36,21 @@ body {
   margin: 0;
 }
 
-form{
+form {
   margin: 10% 20%;
 }
 
 footer {
   width: 100vw;
   padding: 0;
+}
+
+.not-found-container {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: url("/img/sad-cat-pizza.gif");
+  background-position: center;
 }

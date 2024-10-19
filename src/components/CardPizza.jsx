@@ -1,11 +1,14 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 const CardPizza = ({ pizza }) => {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={pizza.img} alt={pizza.name} />
+    <Card style={{ width: "18rem" }} >
+      <Link to="pizza/p001">
+        <Card.Img variant="top" src={pizza.img} alt={pizza.name} />
+      </Link>
       <Card.Body>
         <Card.Title className="fw-bold text-capitalize">{pizza.name}</Card.Title>
         <Card.Text>
