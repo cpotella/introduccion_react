@@ -1,9 +1,12 @@
 import { Container, Button, Nav, Navbar } from "react-bootstrap";
 import "../App.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 function NavInicio() {
-    const total = 25000;
+    const {calculateTotal} = useContext(CartContext);
+    const total = calculateTotal();
     const token = true; 
 
     return (
@@ -27,7 +30,7 @@ function NavInicio() {
                 )}
             </Nav>
             <Button as={Link} to="/cart" variant="outline-light" className="ms-auto">
-                🛒 Total: ${total.toLocaleString()}
+                🛒 Total: {total}
             </Button>
             </Navbar.Collapse>
         </Container>

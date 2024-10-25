@@ -1,37 +1,11 @@
-import React, { useState } from 'react';
-import { pizzas } from '../pizzas';
+import React, { useContext } from 'react';
 import { Container, Row, Card, Button } from 'react-bootstrap';
+import { CartContext } from '../context/CartContext';
 
-function Cart() {
-  const [cart, setCart] = useState(
-    pizzas.map((pizza) => ({ ...pizza, cantidad: 1 }))
-  );
 
-  const aumentarCantidad = (id) => {
-    setCart((prevCart) =>
-      prevCart.map((pizza) =>
-        pizza.id === id ? { ...pizza, cantidad: pizza.cantidad + 1 } : pizza
-      )
-    );
-  };
+const Cart = () => {
+  const { cart, addToCart, removeFromCart, calculateTotal } = useContext(CartContext);
 
-  const disminuirCantidad = (id) => {
-    setCart((prevCart) =>
-      prevCart
-        .map((pizza) =>
-          pizza.id === id ? { ...pizza, cantidad: pizza.cantidad - 1 } : pizza
-        )
-        .filter((pizza) => pizza.cantidad > 0)
-    );
-  };
-
-  const calcularTotal = () => {
-    let total = 0;
-    cart.forEach(pizza => {
-      total += pizza.precio * pizza.cantidad;
-    });
-    return total;
-  };
 
   return (
     <Container className="mt-5">
@@ -40,21 +14,21 @@ function Cart() {
         {cart.map((pizza) => (
           <div key={pizza.id} className="mb-4">
             <Card style={{ width: "16rem" }}>
-              <Card.Img variant="top" src={pizza.imagen} alt={pizza.nombre} />
+              <Card.Img variant="top" src={pizza.img} alt={pizza.name} />
               <Card.Body>
-                <Card.Title>{pizza.nombre}</Card.Title>
-                <Card.Text>Precio: ${pizza.precio}</Card.Text>
+                <Card.Title>{pizza.name}</Card.Title>
+                <Card.Text>Precio: ${pizza.price}</Card.Text>
                 <Card.Text>Cantidad: {pizza.cantidad}</Card.Text>
                 <div className="d-flex justify-content-between">
-                  <Button variant="danger" onClick={() => disminuirCantidad(pizza.id)}>-</Button>
-                  <Button variant="primary" onClick={() => aumentarCantidad(pizza.id)}>+</Button>
+                  <Button variant="danger" onClick={() => removeFromCart(pizza.id)}>-</Button>
+                  <Button variant="primary" onClick={() =>  addToCart(pizza)}>+</Button>
                 </div>
               </Card.Body>
             </Card>
           </div>
         ))}
       </Row>
-      <h3 className="mt-4">Total: ${calcularTotal().toLocaleString()}</h3>
+      <h3 className="mt-4">Total: {calculateTotal()}</h3>
       <Button variant="dark">Pagar</Button>
     </Container>
   

@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardPizza from "../components/CardPizza";
+import { CartContext } from "../context/CartContext";
 
 const Home = () => {
+  const { addToCart } = useContext(CartContext);
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const Home = () => {
       <Row className="g-4 justify-content-center">
         {pizzas.map((pizza) => (
           <Col key={pizza.id} xs={12} md={4} lg={4} xl={3}>
-            <CardPizza pizza={pizza} />
+            <CardPizza pizza={pizza} addToCart={addToCart} />
           </Col>
         ))}
       </Row>

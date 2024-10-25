@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import "../App.css";
 import { Link } from "react-router-dom";
 
-const CardPizza = ({ pizza }) => {
+const CardPizza = ({ pizza, addToCart }) => {
   return (
     <Card style={{ width: "18rem" }} >
       <Link to="pizza/p001">
@@ -16,7 +16,7 @@ const CardPizza = ({ pizza }) => {
           {/* <strong>Disponibilidad:</strong> {pizza.disponibilidad} <br /> */}
           <strong>Ingredientes: 🍕</strong> {pizza.ingredients.join(", ")}
         </Card.Text>
-        <Button variant="primary"> Añadir al carrito</Button>
+        <Button variant="primary" onClick={() => addToCart(pizza)}> Añadir al carrito</Button>
         {/* <Button variant="primary" disabled={pizza.stock === 0}>
           {pizza.stock > 0 ? "Añadir al carrito" : "Agotado"}
         </Button> */}
