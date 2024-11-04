@@ -8,7 +8,7 @@ function Detail() {
 
   useEffect(() => {
     const apiPizza = async () => {
-      const response = await fetch(`http://localhost:5001/api/pizzas/${id}`); 
+      const response = await fetch(`http://localhost:5000/api/pizzas/${id}`); 
       const data = await response.json();
       setPizzas([data]); 
     };
