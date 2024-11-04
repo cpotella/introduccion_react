@@ -3,11 +3,12 @@ import "../App.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 function NavInicio() {
     const {calculateTotal} = useContext(CartContext);
     const total = calculateTotal();
-    const token = true; 
+    const { token, logout } = useContext(UserContext);
 
     return (
         <Navbar expand="lg" fixed="top" collapseOnSelect className="bg-body-tertiary w-100" data-bs-theme="dark">
@@ -20,7 +21,7 @@ function NavInicio() {
                 {token ? (
                 <>
                     <Nav.Link as={Link} to="/profile" className="Nav-border">🔓Profile</Nav.Link>
-                    <Nav.Link href="#logout" className="Nav-border">🔒Logout</Nav.Link>
+                    <Nav.Link href="#logout" className="Nav-border" onClick={logout}>🔒Logout</Nav.Link>
                 </>
                 ) : (
                 <>

@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { Container, Row, Card, Button } from 'react-bootstrap';
 import { CartContext } from '../context/CartContext';
+import { UserContext } from '../context/UserContext';
 
 
 const Cart = () => {
   const { cart, addToCart, removeFromCart, calculateTotal } = useContext(CartContext);
+  const { token } = useContext(UserContext);
 
 
   return (
@@ -29,7 +31,7 @@ const Cart = () => {
         ))}
       </Row>
       <h3 className="mt-4">Total: {calculateTotal()}</h3>
-      <Button variant="dark">Pagar</Button>
+      <Button variant="dark" disabled={!token}>Pagar</Button>
     </Container>
   
   );

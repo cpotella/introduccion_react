@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const CardPizza = ({ pizza, addToCart }) => {
   return (
     <Card style={{ width: "18rem" }} >
-      <Link to="pizza/p001">
+      <Link to={`/pizza/${pizza.id}`}>
         <Card.Img variant="top" src={pizza.img} alt={pizza.name} />
       </Link>
       <Card.Body>
