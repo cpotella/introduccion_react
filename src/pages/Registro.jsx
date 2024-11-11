@@ -2,14 +2,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Button, Form } from "react-bootstrap";
 import "../App.css";
 import React, { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 function Registro() {
+  const { register } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const validarInput = (e) => {
+  const validarInput = async (e) => {
     e.preventDefault();
 
     if (email === "" || password === "" || confirmPassword === "") {
@@ -27,13 +30,17 @@ function Registro() {
       return;
     }
 
-    setError(""); 
+    setError("");
 
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-
-    alert("¡Registro exitoso!");
+    try {
+      await register({ email, password });
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      alert("¡Registro exitoso!");
+    } catch (err) {
+      setError("Hubo un error al registrar el usuario");
+    }
   };
 
   return (

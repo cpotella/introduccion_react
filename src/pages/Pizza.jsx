@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Card, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { API_CONFIG } from "../config";
+
 
 function Detail() {
   const { id } = useParams();
@@ -8,7 +10,7 @@ function Detail() {
 
   useEffect(() => {
     const apiPizza = async () => {
-      const response = await fetch(`http://localhost:5000/api/pizzas/${id}`); 
+      const response = await fetch(`http://${API_CONFIG.ip}:${API_CONFIG.port}/api/pizzas/${id}`); 
       const data = await response.json();
       setPizzas([data]); 
     };
