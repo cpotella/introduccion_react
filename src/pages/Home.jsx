@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CardPizza from "../components/CardPizza";
 import { CartContext } from "../context/CartContext";
+import { API_CONFIG } from "../config";
+
 
 const Home = () => {
   const { addToCart } = useContext(CartContext);
@@ -9,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     const apiPizzas = async () => {
-      const response = await fetch("http://localhost:5000/api/pizzas");
+      const response = await fetch(`http://${API_CONFIG.ip}:${API_CONFIG.port}/api/pizzas`);
       const data = await response.json();
       setPizzas(data);
     };

@@ -1,14 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Button, Form } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../App.css";
+import { UserContext } from "../context/UserContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const {login} = useContext(UserContext);
 
-  const validarInput = (e) => {
+  const validarInput = async (e) => {
     e.preventDefault();
 
     if (email === "" || password === "") {
@@ -23,10 +25,14 @@ function Login() {
 
     setError("");
 
-    setEmail("");
-    setPassword("");
-
-    alert("¡Has iniciado sesión exitosamente!");
+    try{
+      await login ({email, password});
+      alert ("Has iniciado sesión correctamente");
+      setEmail("");
+      setPassword("");
+    } catch (err){
+    setError(err.message || "No se pudo iniciar sesión");
+  }
   };
 
   return (
